@@ -442,14 +442,14 @@ namespace CreateFile
 
                 if (openFD.ShowDialog() == DialogResult.OK)
                 {
-                    if (CreateFile.CreateFile.numberСolumns > 0)
+                    if (CreateFile.numberСolumns > 0)
                     {
                         dataGridView1.Columns.Remove("Zav");
-                        for (int s = 1; s < CreateFile.CreateFile.numberСolumns; s++)
+                        for (int s = 1; s < CreateFile.numberСolumns; s++)
                         {
                             dataGridView1.Columns.Remove("NZav" + s.ToString());
                         }
-                        CreateFile.CreateFile.numberСolumns = 0;
+                        CreateFile.numberСolumns = 0;
                     }
                     Stream myStream = openFD.OpenFile();
                     if (myStream != null)
@@ -464,7 +464,7 @@ namespace CreateFile
                                 ds.ReadXmlSchema(openFD.FileName.Substring(0, (openFD.FileName.Length - 4)) + ".xsd");
 
                                 count_cols = ds.Tables[0].Columns.Count;
-                                CreateFile.CreateFile.numberСolumns = count_cols;
+                                CreateFile.numberСolumns = count_cols;
                                 headText = "Зависимая переменная";
                                 columnName = "Zav";
                                 dataGridView1.Columns.Add(columnName, headText);
@@ -512,7 +512,7 @@ namespace CreateFile
                                     columnName = "NZav" + k.ToString();
                                     dataGridView1.Columns.Add(columnName, headText);
                                 }
-                                CreateFile.CreateFile.numberСolumns = count_cols;
+                                CreateFile.numberСolumns = count_cols;
                                 while ((input = sr.ReadLine()) != null) // считывание информации из файла по-строчно
                                 {
                                     i++;
@@ -565,7 +565,7 @@ namespace CreateFile
 
                                 string[] outp = new string[count_cols];
 
-                                CreateFile.CreateFile.numberСolumns = count_cols;
+                                CreateFile.numberСolumns = count_cols;
                                 headText = "Зависимая переменная";
                                 columnName = "Zav";
                                 dataGridView1.Columns.Add(columnName, headText);
@@ -620,7 +620,7 @@ namespace CreateFile
 
                                 string[] outp = new string[count_cols];
 
-                                CreateFile.CreateFile.numberСolumns = count_cols;
+                                CreateFile.numberСolumns = count_cols;
                                 headText = "Зависимая переменная";
                                 columnName = "Zav";
                                 dataGridView1.Columns.Add(columnName, headText);
