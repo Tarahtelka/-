@@ -53,6 +53,7 @@
             this.Help_About_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Help_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.About_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.логистическаяРегрессияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.main_menu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -108,7 +109,7 @@
             this.регрессионоеИсследованиеToolStripMenuItem,
             this.корреToolStripMenuItem});
             this.select_MenuItem.Name = "select_MenuItem";
-            this.select_MenuItem.Size = new System.Drawing.Size(120, 20);
+            this.select_MenuItem.Size = new System.Drawing.Size(119, 20);
             this.select_MenuItem.Text = "Тип исследования";
             // 
             // регрессионоеИсследованиеToolStripMenuItem
@@ -117,6 +118,7 @@
             this.определитьПрименимыйМетодToolStripMenuItem1,
             this.простаяЛинейнаяРегрессияToolStripMenuItem,
             this.множественнаяЛинейнаяРегрессияToolStripMenuItem,
+            this.логистическаяРегрессияToolStripMenuItem,
             this.посмотретьИсториюПредварительногоАнализаToolStripMenuItem});
             this.регрессионоеИсследованиеToolStripMenuItem.Name = "регрессионоеИсследованиеToolStripMenuItem";
             this.регрессионоеИсследованиеToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
@@ -237,6 +239,13 @@
             this.About_MenuItem.Text = "О программе...";
             this.About_MenuItem.Click += new System.EventHandler(this.About_MenuItem_Click);
             // 
+            // логистическаяРегрессияToolStripMenuItem
+            // 
+            this.логистическаяРегрессияToolStripMenuItem.Name = "логистическаяРегрессияToolStripMenuItem";
+            this.логистическаяРегрессияToolStripMenuItem.Size = new System.Drawing.Size(345, 22);
+            this.логистическаяРегрессияToolStripMenuItem.Text = "Логистическая регрессия";
+            this.логистическаяРегрессияToolStripMenuItem.Click += new System.EventHandler(this.логистическаяРегрессияToolStripMenuItem_Click);
+            // 
             // mdi_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -281,6 +290,7 @@
         private System.Windows.Forms.ToolStripMenuItem простаяЛинейнаяРегрессияToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem множественнаяЛинейнаяРегрессияToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem посмотретьИсториюПредварительногоАнализаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem логистическаяРегрессияToolStripMenuItem;
     }
 }
 

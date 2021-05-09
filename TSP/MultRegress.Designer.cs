@@ -91,7 +91,7 @@
             // 
             this.openFD_File.Name = "openFD_File";
             this.openFD_File.ShortcutKeyDisplayString = "";
-            this.openFD_File.Size = new System.Drawing.Size(126, 22);
+            this.openFD_File.Size = new System.Drawing.Size(180, 22);
             this.openFD_File.Tag = "";
             this.openFD_File.Text = "Открыть";
             this.openFD_File.Click += new System.EventHandler(this.openFD_File_Click);
@@ -99,7 +99,7 @@
             // очиститьToolStripMenuItem
             // 
             this.очиститьToolStripMenuItem.Name = "очиститьToolStripMenuItem";
-            this.очиститьToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.очиститьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.очиститьToolStripMenuItem.Text = "Очистить";
             this.очиститьToolStripMenuItem.Click += new System.EventHandler(this.очиститьToolStripMenuItem_Click);
             // 

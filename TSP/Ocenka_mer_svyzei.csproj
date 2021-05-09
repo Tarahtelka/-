@@ -210,6 +210,12 @@
       <DependentUpon>ExplCorrelation.cs</DependentUpon>
     </Compile>
     <Compile Include="fdistr.cs" />
+    <Compile Include="LogisticRegress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogisticRegress.Designer.cs">
+      <DependentUpon>LogisticRegress.cs</DependentUpon>
+    </Compile>
     <Compile Include="MultRegress.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -350,6 +356,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Explanatory\ExplCorrelation.resx">
       <DependentUpon>ExplCorrelation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogisticRegress.resx">
+      <DependentUpon>LogisticRegress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MultRegress.resx">
       <DependentUpon>MultRegress.cs</DependentUpon>

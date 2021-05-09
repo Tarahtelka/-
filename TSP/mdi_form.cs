@@ -154,5 +154,12 @@ namespace Ocenka_mer_svyzei
             selectRegression.MdiParent = this;
             selectRegression.Show();
         }
+
+        private void логистическаяРегрессияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LogisticRegress multRegress = new LogisticRegress();
+            multRegress.MdiParent = this;
+            multRegress.Show();
+        }
     }
 }
