@@ -432,23 +432,24 @@ namespace CreateFile
         public void open_file(DataGridView dg1)
         {
             count_cols = 0;
-               // считывание данных из файла
-               DataGridView dg = dg1;
+            // считывание данных из файла
+            DataGridView dg = dg1;
+
             try
             {
-                openFD.Filter = "Text Files (*.txt)|*.txt|" + "XML Files (*.xml)|*.xml|" + "EXCEL Files (*.xls)|*.xls";
+                openFD.Filter = "Text Files (*.txt)|*.txt|" + "XML Files (*.xml)|*.xml|" + "EXCEL Files (*.xls)|*.xls|" + "CSV Files (*.csv)|*.csv";
                 openFD.RestoreDirectory = true;
 
                 if (openFD.ShowDialog() == DialogResult.OK)
                 {
-                    if (CreateFile.numberСolumns > 0)
+                    if (CreateFile.CreateFile.numberСolumns > 0)
                     {
                         dataGridView1.Columns.Remove("Zav");
-                        for (int s = 1; s < CreateFile.numberСolumns; s++)
+                        for (int s = 1; s < CreateFile.CreateFile.numberСolumns; s++)
                         {
                             dataGridView1.Columns.Remove("NZav" + s.ToString());
                         }
-                        CreateFile.numberСolumns = 0;
+                        CreateFile.CreateFile.numberСolumns = 0;
                     }
                     Stream myStream = openFD.OpenFile();
                     if (myStream != null)
@@ -457,13 +458,13 @@ namespace CreateFile
                         {
                             // считывание данных из файла xml
                             try
-                            {                              
+                            {
                                 DataSet ds = new DataSet();
                                 ds.ReadXml(openFD.FileName);
                                 ds.ReadXmlSchema(openFD.FileName.Substring(0, (openFD.FileName.Length - 4)) + ".xsd");
 
                                 count_cols = ds.Tables[0].Columns.Count;
-                                CreateFile.numberСolumns = count_cols;
+                                CreateFile.CreateFile.numberСolumns = count_cols;
                                 headText = "Зависимая переменная";
                                 columnName = "Zav";
                                 dataGridView1.Columns.Add(columnName, headText);
@@ -504,14 +505,14 @@ namespace CreateFile
                                 headText = "Зависимая переменная";
                                 columnName = "Zav";
                                 dataGridView1.Columns.Add(columnName, headText);
-                                count_cols = sr.ReadLine().Split(' ').Length-1;
+                                count_cols = sr.ReadLine().Split(' ').Length - 1;
                                 for (int k = 1; k < count_cols; k++)
                                 {
                                     headText = "Независимая переменная №" + k.ToString();
                                     columnName = "NZav" + k.ToString();
                                     dataGridView1.Columns.Add(columnName, headText);
                                 }
-                                CreateFile.numberСolumns = count_cols;
+                                CreateFile.CreateFile.numberСolumns = count_cols;
                                 while ((input = sr.ReadLine()) != null) // считывание информации из файла по-строчно
                                 {
                                     i++;
@@ -564,7 +565,7 @@ namespace CreateFile
 
                                 string[] outp = new string[count_cols];
 
-                                CreateFile.numberСolumns = count_cols;
+                                CreateFile.CreateFile.numberСolumns = count_cols;
                                 headText = "Зависимая переменная";
                                 columnName = "Zav";
                                 dataGridView1.Columns.Add(columnName, headText);
@@ -595,6 +596,55 @@ namespace CreateFile
                                     if (j > 0)
                                         dg.Rows.Add(outp);
                                     j++;
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+                        }
+                        else if (openFD.FileName.Substring((openFD.FileName.Length - 3), 3).CompareTo("csv") == 0)
+                        {
+                            try
+                            {
+                                var inputArray = new List<string>();
+
+                                using (StreamReader streamReader = new StreamReader(openFD.FileName))
+                                {
+                                    inputArray = streamReader.ReadToEnd().Replace("\r", "").Split('\n').Select(s => s.Trim()).ToList();
+                                    inputArray.RemoveAt(0);
+                                }
+                                myStream.Close();
+
+                                count_cols = inputArray[0].Split(';').Length;
+
+                                string[] outp = new string[count_cols];
+
+                                CreateFile.CreateFile.numberСolumns = count_cols;
+                                headText = "Зависимая переменная";
+                                columnName = "Zav";
+                                dataGridView1.Columns.Add(columnName, headText);
+                                for (int k = 1; k < count_cols; k++)
+                                {
+                                    headText = "Независимая переменная №" + k.ToString();
+                                    columnName = "NZav" + k.ToString();
+                                    dataGridView1.Columns.Add(columnName, headText);
+                                }
+
+                                int j = 0;
+                                foreach (var rw in inputArray)
+                                {
+                                    int i = 0;
+                                    var temp = rw.Split(';');
+                                    foreach (var cl in temp)
+                                    {
+                                        if (!string.IsNullOrEmpty(cl))
+                                            outp[i] = cl + " ";
+                                        if (string.IsNullOrEmpty(cl))
+                                            outp[i] = "0 ";
+                                        i++;
+                                    }
+                                    dg.Rows.Add(outp);
                                 }
                             }
                             catch (Exception ex)

@@ -317,7 +317,7 @@ namespace Ocenka_mer_svyzei
 
             try
             {
-                openFD.Filter = "Text Files (*.txt)|*.txt|" + "XML Files (*.xml)|*.xml|" + "EXCEL Files (*.xls)|*.xls";
+                openFD.Filter = "Text Files (*.txt)|*.txt|" + "XML Files (*.xml)|*.xml|" + "EXCEL Files (*.xls)|*.xls|" + "CSV Files (*.csv)|*.csv";
                 openFD.RestoreDirectory = true;
 
                 if (openFD.ShowDialog() == DialogResult.OK)
@@ -476,6 +476,55 @@ namespace Ocenka_mer_svyzei
                                     if (j > 0)
                                         dg.Rows.Add(outp);
                                     j++;
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+                        }
+                        else if (openFD.FileName.Substring((openFD.FileName.Length - 3), 3).CompareTo("csv") == 0)
+                        {
+                            try
+                            {
+                                var inputArray = new List<string>();
+
+                                using (StreamReader streamReader = new StreamReader(openFD.FileName))
+                                {
+                                    inputArray = streamReader.ReadToEnd().Replace("\r", "").Split('\n').Select(s => s.Trim()).ToList();
+                                    inputArray.RemoveAt(0);
+                                }
+                                myStream.Close();
+
+                                count_cols = inputArray[0].Split(';').Length;
+
+                                string[] outp = new string[count_cols];
+
+                                CreateFile.CreateFile.numberСolumns = count_cols;
+                                headText = "Зависимая переменная";
+                                columnName = "Zav";
+                                dataGridView1.Columns.Add(columnName, headText);
+                                for (int k = 1; k < count_cols; k++)
+                                {
+                                    headText = "Независимая переменная №" + k.ToString();
+                                    columnName = "NZav" + k.ToString();
+                                    dataGridView1.Columns.Add(columnName, headText);
+                                }
+
+                                int j = 0;
+                                foreach (var rw in inputArray)
+                                {
+                                    int i = 0;
+                                    var temp = rw.Split(';');
+                                    foreach (var cl in temp)
+                                    {
+                                        if (!string.IsNullOrEmpty(cl))
+                                            outp[i] = cl + " ";
+                                        if (string.IsNullOrEmpty(cl))
+                                            outp[i] = "0 ";
+                                        i++;
+                                    }
+                                    dg.Rows.Add(outp);
                                 }
                             }
                             catch (Exception ex)
