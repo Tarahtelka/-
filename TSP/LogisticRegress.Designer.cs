@@ -28,6 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -39,6 +47,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tbLogLikelihood = new System.Windows.Forms.TextBox();
             this.dgvLogisticCoefficients = new System.Windows.Forms.DataGridView();
+            this.Run = new System.Windows.Forms.Button();
+            this.File_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFD_File = new System.Windows.Forms.ToolStripMenuItem();
+            this.очиститьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.main_menu = new System.Windows.Forms.MenuStrip();
+            this.openFD = new System.Windows.Forms.OpenFileDialog();
             this.colComponent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEigenValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSingularValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,12 +61,6 @@
             this.colConfidenceMin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProportion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LikelihoodRatio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Run = new System.Windows.Forms.Button();
-            this.File_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openFD_File = new System.Windows.Forms.ToolStripMenuItem();
-            this.очиститьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.main_menu = new System.Windows.Forms.MenuStrip();
-            this.openFD = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogisticCoefficients)).BeginInit();
             this.main_menu.SuspendLayout();
@@ -163,46 +171,6 @@
             this.dgvLogisticCoefficients.Size = new System.Drawing.Size(845, 355);
             this.dgvLogisticCoefficients.TabIndex = 30;
             // 
-            // colComponent
-            // 
-            this.colComponent.HeaderText = "Name";
-            this.colComponent.Name = "colComponent";
-            // 
-            // colEigenValue
-            // 
-            this.colEigenValue.HeaderText = "Value";
-            this.colEigenValue.Name = "colEigenValue";
-            // 
-            // colSingularValue
-            // 
-            this.colSingularValue.HeaderText = "StandardError";
-            this.colSingularValue.Name = "colSingularValue";
-            // 
-            // colOddsRatio
-            // 
-            this.colOddsRatio.HeaderText = "OddsRatio";
-            this.colOddsRatio.Name = "colOddsRatio";
-            // 
-            // colConfidenceMax
-            // 
-            this.colConfidenceMax.HeaderText = "ConfidenceUpper";
-            this.colConfidenceMax.Name = "colConfidenceMax";
-            // 
-            // colConfidenceMin
-            // 
-            this.colConfidenceMin.HeaderText = "ConfidenceLower";
-            this.colConfidenceMin.Name = "colConfidenceMin";
-            // 
-            // colProportion
-            // 
-            this.colProportion.HeaderText = "Wald p-Value";
-            this.colProportion.Name = "colProportion";
-            // 
-            // LikelihoodRatio
-            // 
-            this.LikelihoodRatio.HeaderText = "Likelihood-Ratio p-Value";
-            this.LikelihoodRatio.Name = "LikelihoodRatio";
-            // 
             // Run
             // 
             this.Run.Enabled = false;
@@ -255,6 +223,77 @@
             // 
             this.openFD.FileName = "openFD";
             // 
+            // colComponent
+            // 
+            this.colComponent.DataPropertyName = "Name";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colComponent.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colComponent.HeaderText = "Name";
+            this.colComponent.Name = "colComponent";
+            // 
+            // colEigenValue
+            // 
+            this.colEigenValue.DataPropertyName = "Value";
+            dataGridViewCellStyle2.Format = "N5";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colEigenValue.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colEigenValue.HeaderText = "Value";
+            this.colEigenValue.Name = "colEigenValue";
+            // 
+            // colSingularValue
+            // 
+            this.colSingularValue.DataPropertyName = "StandardError";
+            dataGridViewCellStyle3.Format = "N5";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colSingularValue.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colSingularValue.HeaderText = "Standard Error";
+            this.colSingularValue.Name = "colSingularValue";
+            // 
+            // colOddsRatio
+            // 
+            this.colOddsRatio.DataPropertyName = "OddsRatio";
+            dataGridViewCellStyle4.Format = "N5";
+            dataGridViewCellStyle4.NullValue = null;
+            this.colOddsRatio.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colOddsRatio.HeaderText = "Odds Ratio";
+            this.colOddsRatio.Name = "colOddsRatio";
+            // 
+            // colConfidenceMax
+            // 
+            this.colConfidenceMax.DataPropertyName = "ConfidenceUpper";
+            dataGridViewCellStyle5.Format = "N5";
+            dataGridViewCellStyle5.NullValue = null;
+            this.colConfidenceMax.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colConfidenceMax.HeaderText = "Confidence Upper";
+            this.colConfidenceMax.Name = "colConfidenceMax";
+            // 
+            // colConfidenceMin
+            // 
+            this.colConfidenceMin.DataPropertyName = "ConfidenceLower";
+            dataGridViewCellStyle6.Format = "N5";
+            dataGridViewCellStyle6.NullValue = null;
+            this.colConfidenceMin.DefaultCellStyle = dataGridViewCellStyle6;
+            this.colConfidenceMin.HeaderText = "Confidence Lower";
+            this.colConfidenceMin.Name = "colConfidenceMin";
+            // 
+            // colProportion
+            // 
+            this.colProportion.DataPropertyName = "Wald";
+            dataGridViewCellStyle7.Format = "N4";
+            dataGridViewCellStyle7.NullValue = null;
+            this.colProportion.DefaultCellStyle = dataGridViewCellStyle7;
+            this.colProportion.HeaderText = "Wald p-Value";
+            this.colProportion.Name = "colProportion";
+            // 
+            // LikelihoodRatio
+            // 
+            this.LikelihoodRatio.DataPropertyName = "LikelihoodRatio";
+            dataGridViewCellStyle8.Format = "N4";
+            dataGridViewCellStyle8.NullValue = "-";
+            this.LikelihoodRatio.DefaultCellStyle = dataGridViewCellStyle8;
+            this.LikelihoodRatio.HeaderText = "Likelihood-Ratio p-Value";
+            this.LikelihoodRatio.Name = "LikelihoodRatio";
+            // 
             // LogisticRegress
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -297,6 +336,12 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tbLogLikelihood;
         private System.Windows.Forms.DataGridView dgvLogisticCoefficients;
+        private System.Windows.Forms.Button Run;
+        private System.Windows.Forms.ToolStripMenuItem File_MenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openFD_File;
+        private System.Windows.Forms.ToolStripMenuItem очиститьToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip main_menu;
+        private System.Windows.Forms.OpenFileDialog openFD;
         private System.Windows.Forms.DataGridViewTextBoxColumn colComponent;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEigenValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSingularValue;
@@ -305,11 +350,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colConfidenceMin;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProportion;
         private System.Windows.Forms.DataGridViewTextBoxColumn LikelihoodRatio;
-        private System.Windows.Forms.Button Run;
-        private System.Windows.Forms.ToolStripMenuItem File_MenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openFD_File;
-        private System.Windows.Forms.ToolStripMenuItem очиститьToolStripMenuItem;
-        private System.Windows.Forms.MenuStrip main_menu;
-        private System.Windows.Forms.OpenFileDialog openFD;
     }
 }

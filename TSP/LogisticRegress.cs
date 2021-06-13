@@ -1,5 +1,6 @@
 ﻿using Accord.Statistics.Analysis;
 using Accord.Statistics.Models.Regression;
+using Accord.Statistics.Models.Regression.Linear;
 using GemBox.Spreadsheet;
 using System;
 using System.Collections.Generic;
@@ -39,7 +40,7 @@ namespace Ocenka_mer_svyzei
                 MessageBox.Show(ex.Message);
             }
         }
-
+        private MultipleLinearRegressionAnalysis mlr;
         string headText, columnName;
         int count_cols, count_rows;
         StreamReader sr, sr2;
@@ -305,11 +306,11 @@ namespace Ocenka_mer_svyzei
         {
             // Finishes and save any pending changes to the given data
             dataGridView1.EndEdit();
-            double[][] inputs = new double[dataGridView1.RowCount-1][];
-            double[] outputs = new double[dataGridView1.RowCount-1];
+            double[][] inputs = new double[dataGridView1.RowCount - 1][];
+            double[] outputs = new double[dataGridView1.RowCount - 1];
             List<double> vs = new List<double>();
 
-            for (int j = 0; j < dataGridView1.RowCount-1; j++)
+            for (int j = 0; j < dataGridView1.RowCount - 1; j++)
             {
                 for (int i = 0; i < dataGridView1.ColumnCount - 1; i++)
                 {
@@ -318,12 +319,16 @@ namespace Ocenka_mer_svyzei
                 inputs[j] = vs.ToArray();
                 vs.Clear();
             }
-            for (int i = 0; i < dataGridView1.RowCount-1; i++)
+            for (int i = 0; i < dataGridView1.RowCount - 1; i++)
             {
                 outputs[i] = Convert.ToDouble(dataGridView1.Rows[i].Cells[0].Value);
             }
 
-            var lra = new LogisticRegressionAnalysis();
+            var lra = new LogisticRegressionAnalysis()
+            {
+                Inputs = GetIndependentNames(),
+                Output = GetDependentName()
+            };
 
             //Compute the Logistic Regression Analysis
             LogisticRegression lr = lra.Learn(inputs, outputs);
@@ -337,6 +342,43 @@ namespace Ocenka_mer_svyzei
             checkBox1.Checked = lra.ChiSquare.Significant;
             tbDeviance.Text = lra.Deviance.ToString("N5");
             tbLogLikelihood.Text = lra.LogLikelihood.ToString("N5");
+
+            ////Нужно считать названия переменных
+            //this.mlr = new MultipleLinearRegressionAnalysis(intercept: true)
+            //{
+            //    Inputs = GetIndependentNames(),
+            //    Output = GetDependentName()
+            //};
+
+            //// Compute the Linear Regression Analysis
+            //MultipleLinearRegression reg = mlr.Learn(inputs, outputs);
+
+            //dgvLinearCoefficients.DataSource = mlr.Coefficients;
+            //dgvRegressionAnova.DataSource = mlr.Table;
+
         }
+
+        private string GetDependentName()
+        {
+            return "Зависимая переменная";
+        }
+
+        private string[] GetIndependentNames()
+        {
+            if (dataGridView1.ColumnCount < 0)
+            {
+                throw new Exception("Логистчисческая выход меня независимыж");
+            }
+
+            string[] result = new string[dataGridView1.ColumnCount - 1];
+
+            for (int i = 0; i < dataGridView1.ColumnCount-1; i++)
+            {
+                result[i] = $"Независимая переменная №{i + 1}";
+            }
+
+            return result;
+        }
+
     }
 }
