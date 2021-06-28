@@ -63,41 +63,41 @@ namespace Ocenka_mer_svyzei
         {
             if (dataGridView1.Columns.Count > 2)
             {
-                if (dataGridView1.Columns.Count + 1 <= dataGridView1.RowCount)
+                if (dataGridView1.Columns.Count + 1 <= dataGridView1.RowCount-1)
                 { 
                     richTextBox1.Clear();
 
                     var a = new MultipleLinearRegression();
                     selectComboBox.Items.Clear();
-                    double[,] nzav = new double[dataGridView1.RowCount, dataGridView1.ColumnCount - 1];
-                    double[] zav = new double[dataGridView1.RowCount];
-                    double[,] matr = new double[dataGridView1.RowCount, dataGridView1.ColumnCount];
-                    double[,] allvaluse = new double[dataGridView1.RowCount, dataGridView1.ColumnCount];
-                    for (int i = 0; i < dataGridView1.RowCount; i++)
+                    double[,] nzav = new double[dataGridView1.RowCount-1, dataGridView1.ColumnCount - 1];
+                    double[] zav = new double[dataGridView1.RowCount-1];
+                    double[,] matr = new double[dataGridView1.RowCount-1, dataGridView1.ColumnCount];
+                    double[,] allvaluse = new double[dataGridView1.RowCount-1, dataGridView1.ColumnCount];
+                    for (int i = 0; i < dataGridView1.RowCount-1; i++)
                     {
                         matr[i, 0] = 1;
                     }
                     for (int j = 0; j < dataGridView1.ColumnCount - 1; j++)
                     {
-                        for (int i = 0; i < dataGridView1.RowCount; i++)
+                        for (int i = 0; i < dataGridView1.RowCount - 1; i++)
                         {
                             nzav[i, j] = Convert.ToDouble(dataGridView1.Rows[i].Cells[j + 1].Value);
                         }
                     }
-                    for (int i = 0; i < dataGridView1.RowCount; i++)
+                    for (int i = 0; i < dataGridView1.RowCount - 1; i++)
                     {
                         zav[i] = Convert.ToDouble(dataGridView1.Rows[i].Cells[0].Value);
                     }
                     for (int j = 1; j < dataGridView1.ColumnCount; j++)
                     {
-                        for (int i = 0; i < dataGridView1.RowCount; i++)
+                        for (int i = 0; i < dataGridView1.RowCount - 1; i++)
                         {
                             matr[i, j] = Convert.ToDouble(dataGridView1.Rows[i].Cells[j].Value);
                         }
                     }
                     for (int j = 0; j < dataGridView1.ColumnCount; j++)
                     {
-                        for (int i = 0; i < dataGridView1.RowCount; i++)
+                        for (int i = 0; i < dataGridView1.RowCount - 1; i++)
                         {
                             allvaluse[i, j] = Convert.ToDouble(dataGridView1.Rows[i].Cells[j].Value);
                         }
@@ -515,10 +515,10 @@ namespace Ocenka_mer_svyzei
 
         public double[,] TranspMatr(double[,] a)
         {
-            double[,] matr = new double[dataGridView1.ColumnCount, dataGridView1.RowCount];
+            double[,] matr = new double[dataGridView1.ColumnCount, dataGridView1.RowCount-1];
             for (int i = 0; i < dataGridView1.ColumnCount; i++)
             {
-                for (int j = 0; j < dataGridView1.RowCount; j++)
+                for (int j = 0; j < dataGridView1.RowCount-1; j++)
                 {
                     matr[i, j] = a[j, i];
                 }
@@ -640,6 +640,7 @@ namespace Ocenka_mer_svyzei
             panel1.Enabled = false;
             button2.Enabled = false;
             ComboBox.SelectedIndex = 0;
+            zg3.GraphPane.Title.Text = "Диаграмма рассеяния";
         }
 
         private void очиститьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -659,6 +660,7 @@ namespace Ocenka_mer_svyzei
         Plotting plotting = new Plotting();
         private void button2_Click(object sender, EventArgs e)
         {
+            zg3.GraphPane.Title.Text = selectComboBox.Text;
             var resultStringcolumn = Convert.ToInt32(string.Join(string.Empty, Regex.Matches(selectComboBox.Text, @"\d+").OfType<Match>().Select(m => m.Value)));
             var notzav = GetM(DateRegression.ValOx, resultStringcolumn-1);
 

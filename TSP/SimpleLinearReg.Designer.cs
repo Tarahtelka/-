@@ -69,6 +69,7 @@
             this.main_menu.Size = new System.Drawing.Size(800, 24);
             this.main_menu.TabIndex = 17;
             this.main_menu.Text = "menuStrip1";
+            this.main_menu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.main_menu_ItemClicked);
             // 
             // File_MenuItem
             // 
@@ -276,6 +277,7 @@
             this.Name = "SimpleLinearReg";
             this.Text = "Простая линейная регрессия";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SimpleLinearRegression_FormClosing);
+            this.Load += new System.EventHandler(this.SimpleLinearReg_Load);
             this.main_menu.ResumeLayout(false);
             this.main_menu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

@@ -81,6 +81,16 @@ namespace Ocenka_mer_svyzei
             CreateFile.CreateFile.numberСolumns = 0;
         }
 
+        private void main_menu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void SimpleLinearReg_Load(object sender, EventArgs e)
+        {
+            zg2.GraphPane.Title.Text = "Диаграмма рассеяния";
+        }
+
         private void SimpleLinearRegression_FormClosing(object sender, FormClosingEventArgs e)
         {
             CreateFile.CreateFile.numberСolumns = 0;
