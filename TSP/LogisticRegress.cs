@@ -28,9 +28,9 @@ namespace Ocenka_mer_svyzei
             try
             {
                 open_file(dataGridView1);
+                //
                 if (dataGridView1.Rows != null && dataGridView1.Rows.Count != 0)
                 {
-
                     Run.Enabled = true;
                 }
 
@@ -68,12 +68,15 @@ namespace Ocenka_mer_svyzei
                 {
                     if (CreateFile.CreateFile.numberСolumns > 0)
                     {
-                        dataGridView1.Columns.Remove("Zav");
-                        for (int s = 1; s < CreateFile.CreateFile.numberСolumns; s++)
+                        if (dataGridView1.Columns.Count > 0)
                         {
-                            dataGridView1.Columns.Remove("NZav" + s.ToString());
+                            dataGridView1.Columns.Remove("Zav");
+                            for (int s = 1; s < CreateFile.CreateFile.numberСolumns; s++)
+                            {
+                                dataGridView1.Columns.Remove("NZav" + s.ToString());
+                            }
+                            CreateFile.CreateFile.numberСolumns = 0;
                         }
-                        CreateFile.CreateFile.numberСolumns = 0;
                     }
                     Stream myStream = openFD.OpenFile();
                     if (myStream != null)
@@ -293,6 +296,9 @@ namespace Ocenka_mer_svyzei
         private void очиститьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             dataGridView1.ClearSelection();
+            dataGridView1.Rows.Clear();
+            dgvLogisticCoefficients.DataSource = null;
+            dgvLogisticCoefficients.Rows.Clear();
             Run.Enabled = true;
             dgvLogisticCoefficients.ClearSelection();
             tbLogLikelihood.Text = "";
@@ -300,6 +306,7 @@ namespace Ocenka_mer_svyzei
             tbChiSquare.Text = "";
             tbPValue.Text = "";
             checkBox1.Checked = false;
+            Run.Enabled = false;
         }
 
         private void Run_Click(object sender, EventArgs e)
@@ -342,20 +349,6 @@ namespace Ocenka_mer_svyzei
             checkBox1.Checked = lra.ChiSquare.Significant;
             tbDeviance.Text = lra.Deviance.ToString("N5");
             tbLogLikelihood.Text = lra.LogLikelihood.ToString("N5");
-
-            ////Нужно считать названия переменных
-            //this.mlr = new MultipleLinearRegressionAnalysis(intercept: true)
-            //{
-            //    Inputs = GetIndependentNames(),
-            //    Output = GetDependentName()
-            //};
-
-            //// Compute the Linear Regression Analysis
-            //MultipleLinearRegression reg = mlr.Learn(inputs, outputs);
-
-            //dgvLinearCoefficients.DataSource = mlr.Coefficients;
-            //dgvRegressionAnova.DataSource = mlr.Table;
-
         }
 
         private string GetDependentName()
